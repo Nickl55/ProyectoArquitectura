@@ -176,7 +176,11 @@
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>2.0.6</version>
-                
+                <configuration>
+                    <processTypes>
+                      <web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
+                    </processTypes>
+                </configuration>
             </plugin>
             
             <plugin>
@@ -184,11 +188,28 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <compilerArgument>-Xlint:all</compilerArgument>
-                    <showWarnings>true</showWarnings>
-                    <showDeprecation>true</showDeprecation>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals><goal>copy</goal></goals>
+                            <configuration>
+                                <artifactItems>
+                                    <artifactItem>
+                                        <groupId>com.github.jsimone</groupId>
+                                        <artifactId>webapp-runner</artifactId>
+                                        <version>9.0.11.0</version>
+                                        <destFileName>webapp-runner.jar</destFileName>
+                                    </artifactItem>
+                                </artifactItems>
+                            </configuration>
+                        </execution>
+                    </executions>
+
+                        <source>1.6</source>
+                        <target>1.6</target>
+                        <compilerArgument>-Xlint:all</compilerArgument>
+                        <showWarnings>true</showWarnings>
+                        <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
             <plugin>
