@@ -184,6 +184,7 @@
                     <version>2.6</version>
                     <configuration>
                         <warName>SpringMVCHibernate</warName>
+                        <warSourceDirectory>src/main/webapp</warSourceDirectory>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
             </plugin>
